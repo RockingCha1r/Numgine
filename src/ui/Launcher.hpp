@@ -5,6 +5,8 @@
 #include <optional>
 #include <string>
 #include "raylib.h"
+#include "tinyfiledialogs.h"
+#include "raygui.h"
 
 std::optional<std::string> launcherInit();
 constexpr int LAUNCHER_WINDOW_HEIGHT = 600;

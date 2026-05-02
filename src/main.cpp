@@ -1,9 +1,8 @@
+#define RAYGUI_IMPLEMENTATION
 #include "ui/Launcher.hpp"
 #include "ui/Editor.hpp"
 #include <string>
 
-constexpr int   WINDOW_WIDTH  = 200;
-constexpr int   WINDOW_HEIGHT = 200;
 constexpr int   TARGET_FPS    = 60;
 constexpr auto  WINDOW_TITLE  = "Numgine";
 
@@ -19,7 +18,7 @@ int main(int argc, char* argv[])
             TraceLog(LOG_INFO,    "Démarrage sans passer par le Launcher.");
         }
     }
-
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     //Création de la fenêtre
     if (projectPath.empty()) { // Si on lance le launcher
         InitWindow(LAUNCHER_WINDOW_WIDTH, LAUNCHER_WINDOW_HEIGHT, WINDOW_TITLE);
