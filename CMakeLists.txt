@@ -14,9 +14,9 @@ FetchContent_Declare(
     GIT_SHALLOW    TRUE
 )
 FetchContent_Declare(
-    tinyfiledialogs
-    GIT_REPOSITORY https://github.com/native-toolkit/libtinyfiledialogs.git
-    GIT_TAG        master
+    nfd
+    GIT_REPOSITORY https://github.com/btzy/nativefiledialog-extended.git
+    GIT_TAG        v1.2.1
     GIT_SHALLOW    TRUE
 )
 FetchContent_Declare(
@@ -29,18 +29,16 @@ FetchContent_Declare(
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(BUILD_GAMES    OFF CACHE BOOL "" FORCE)
 
-FetchContent_MakeAvailable(raylib tinyfiledialogs raygui)
+FetchContent_MakeAvailable(raylib nfd raygui)
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
     src/ui/Launcher.cpp
     src/ui/Editor.cpp
-    ${tinyfiledialogs_SOURCE_DIR}/tinyfiledialogs.c
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    ${tinyfiledialogs_SOURCE_DIR}
     ${raygui_SOURCE_DIR}/src
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib nfd)

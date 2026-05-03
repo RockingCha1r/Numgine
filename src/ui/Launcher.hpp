@@ -4,8 +4,9 @@
 
 #include <optional>
 #include <string>
+#include <filesystem>
 #include "raylib.h"
-#include "tinyfiledialogs.h"
+#include "nfd.h"
 #include "raygui.h"
 
 std::optional<std::string> launcherInit();
