@@ -2,14 +2,33 @@
 
 const char* filters[] = {"*.numgine"};
 
-std::optional<std::string> launcherInit() {
+
+void drawHeader(Font font) {
+    // À REFAIRE POUR PAS AVOIR À METTRE LA FONT ICI
+    // C'est un peu moche actuellement
+    // mais woulah ça va être mieux après
+    ClearBackground(DARKGRAY); 
+    DrawTextEx(font, "Numgine", {20, 16}, 32, 1, WHITE);
+}
+
+std::optional<std::string> launcherInit(int monitorWidth, int monitorHeight) {
+    
+    // Utilisation de la police NotoSans
+    // Je devrais probablement l'ajouter aux thèmes prochainement
+    Font font = LoadFontEx("assets/fonts/NotoSans.ttf", 32, nullptr, 256);
+    if (font.texture.id == GetFontDefault().texture.id) {
+        TraceLog(LOG_WARNING,    "La police ne peut pas être trouvée.");
+    }
+    GuiSetFont(font);
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 32); // Mettre la police dans raygui
+
+
     TraceLog(LOG_INFO,    "Démarrage du Launcher");
     NFD_Init();
     while (!WindowShouldClose())
     {
         BeginDrawing();
-            ClearBackground(DARKGRAY);
-            DrawText("hello world.", 20, 20, 20, RAYWHITE);
+            drawHeader(font);
             if (GuiButton({100, 100, 200, 50}, "Ouvrir projet")) {
                 std::string validPath = "";
 
@@ -42,14 +61,15 @@ std::optional<std::string> launcherInit() {
 
                 if (!validPath.empty()) {
                     NFD_Quit();
-
+                    UnloadFont(font);
                     return validPath;
                 }
             }
             if (GuiButton({100, 200, 200, 50}, "Créer projet")) {
-                
+                // todo
             }
         EndDrawing();
     }
+    UnloadFont(font);
     return std::nullopt;
 }
