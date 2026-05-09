@@ -8,7 +8,10 @@
 #include "raylib.h"
 #include "nfd.h"
 #include "raygui.h"
+#include "../core/Theme.hpp"
+#include "../core/Layout.hpp"
 
+void drawHeader(Font font);
 std::optional<std::string> launcherInit(int monitorWidth, int monitorHeight);
 constexpr int LAUNCHER_WINDOW_HEIGHT = 600;
 constexpr int LAUNCHER_WINDOW_WIDTH = 600;

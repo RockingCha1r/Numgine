@@ -35,6 +35,7 @@ add_executable(${PROJECT_NAME}
     src/main.cpp
     src/ui/Launcher.cpp
     src/ui/Editor.cpp
+    src/core/Layout.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE

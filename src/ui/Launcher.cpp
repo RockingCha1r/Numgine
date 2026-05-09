@@ -7,8 +7,8 @@ void drawHeader(Font font) {
     // À REFAIRE POUR PAS AVOIR À METTRE LA FONT ICI
     // C'est un peu moche actuellement
     // mais woulah ça va être mieux après
-    ClearBackground(DARKGRAY); 
-    DrawTextEx(font, "Numgine", {20, 16}, 32, 1, WHITE);
+    ClearBackground(Theme::current->BG_PRIMARY); 
+    DrawTextEx(font, "Numgine", Layout::coordinateScale(10, 10), 32, 1, Theme::current->TEXT_PRIMARY);
 }
 
 std::optional<std::string> launcherInit(int monitorWidth, int monitorHeight) {
@@ -27,8 +27,12 @@ std::optional<std::string> launcherInit(int monitorWidth, int monitorHeight) {
     NFD_Init();
     while (!WindowShouldClose())
     {
+        Layout::actualize();
         BeginDrawing();
+            
             drawHeader(font);
+
+
             if (GuiButton({100, 100, 200, 50}, "Ouvrir projet")) {
                 std::string validPath = "";
 
