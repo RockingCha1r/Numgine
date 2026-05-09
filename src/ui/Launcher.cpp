@@ -7,15 +7,31 @@ void drawHeader(Font font) {
     // À REFAIRE POUR PAS AVOIR À METTRE LA FONT ICI
     // C'est un peu moche actuellement
     // mais woulah ça va être mieux après
-    ClearBackground(Theme::current->BG_PRIMARY); 
-    DrawTextEx(font, "Numgine", Layout::coordinateScale(10, 10), 32, 1, Theme::current->TEXT_PRIMARY);
+
+    int fontSize = std::min((int)Layout::positionScale(32, Layout::scaleY), 48);
+
+
+    ClearBackground(Theme::current->BG_PRIMARY);
+
+    Vector2 textSize = MeasureTextEx(font, "Numgine", fontSize, 1);
+    Vector2 textPos = {
+        Layout::Width / 2 - textSize.x / 2,
+        0
+    };
+    DrawRectangle(Layout::positionScale(0, Layout::scaleX),
+                    Layout::positionScale(0, Layout::scaleY),
+                    Layout::positionScale(LAUNCHER_WINDOW_WIDTH, Layout::scaleX),
+                    textSize.y,
+                    Theme::current->BG_SECONDARY);
+    
+    DrawTextEx(font, "Numgine", textPos, fontSize, 1, Theme::current->TEXT_PRIMARY);
 }
 
 std::optional<std::string> launcherInit(int monitorWidth, int monitorHeight) {
     
     // Utilisation de la police NotoSans
     // Je devrais probablement l'ajouter aux thèmes prochainement
-    Font font = LoadFontEx("assets/fonts/NotoSans.ttf", 32, nullptr, 256);
+    Font font = LoadFontEx("assets/fonts/NotoSans.ttf", 64, nullptr, 256);
     if (font.texture.id == GetFontDefault().texture.id) {
         TraceLog(LOG_WARNING,    "La police ne peut pas être trouvée.");
     }
@@ -24,6 +40,9 @@ std::optional<std::string> launcherInit(int monitorWidth, int monitorHeight) {
 
 
     TraceLog(LOG_INFO,    "Démarrage du Launcher");
+
+    Layout::setReference(LAUNCHER_WINDOW_WIDTH, LAUNCHER_WINDOW_HEIGHT);
+
     NFD_Init();
     while (!WindowShouldClose())
     {

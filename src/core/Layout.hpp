@@ -17,6 +17,9 @@ namespace Layout {
     int positionScale(int val, float scale);
     Vector2 coordinateScale(int x, int y);
     Vector2 coordinateCentered(int x, int y, int width, int height);
+    Rectangle scaledRect(int x, int y, int width, int height);
+
+    void setReference(int width, int height);
 
 }
 

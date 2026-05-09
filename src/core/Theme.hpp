@@ -5,13 +5,15 @@
 
 struct ThemeData {
     Color BG_PRIMARY;
+    Color BG_SECONDARY;
     Color TEXT_PRIMARY;
 };
 
 namespace Theme {
     inline ThemeData darkClassic = {
-        {0,0,0,255},
-        {255,255,255,255}
+        {15, 15, 15, 255},
+        {24, 24, 24, 255},
+        {240, 240, 240, 255}
     };
 
     inline ThemeData* current = &darkClassic;

@@ -21,3 +21,17 @@ Vector2 Layout::coordinateCentered(int x, int y, int width, int height) {
         (float)(positionScale(y, scaleY) - ( positionScale(height, scaleY) / 2.0f ))
     };
 }
+
+Rectangle Layout::scaledRect(int x, int y, int width, int height) {
+    return {
+        (float)positionScale(x, scaleX),
+        (float)positionScale(y, scaleY),
+        (float)positionScale(width, scaleX),
+        (float)positionScale(height, scaleY)
+    };
+}
+
+void Layout::setReference(int width, int height) {
+    referenceWidth = width;
+    referenceHeight = height;
+}
